@@ -1,0 +1,5 @@
+{
+  "exec": "npm run compile_then_run",
+  "ext": "js,json,ts",
+  "ignore": ["dist"]
+}
