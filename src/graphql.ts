@@ -1,13 +1,8 @@
 import mongodb from "mongodb";
 import apolloServerExpress from "apollo-server-express";
-import graphqlTools from "graphql-tools";
 
 const { ObjectId } = mongodb;
 const { ApolloServer, gql } = apolloServerExpress;
-const { makeExecutableSchema } = graphqlTools;
-
-const graphiqlEndpoint = "/graphiql";
-const graphqlEndpoint = "/graphql";
 
 const prepare = (o) => {
   o._id = o._id.toString();
@@ -94,7 +89,7 @@ export const startGraphQL = async ({ application, connection }) => {
 
     server.applyMiddleware({ app: application });
 
-    console.log(`GraphQLi available at ${graphiqlEndpoint}`);
+    console.log(`GraphQLi available at /graphiql`);
   } catch (error) {
     console.error(error);
   }
