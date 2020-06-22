@@ -2,7 +2,7 @@ import cors from "cors";
 import express from "express";
 import helmet from "helmet";
 
-if (!process.env.API_PORT) {
+if (!process.env.PORT) {
   console.error("NO_PORT");
 
   process.exit(1);
@@ -10,7 +10,7 @@ if (!process.env.API_PORT) {
 
 export const startApplication = async () => {
   const healthCheckEndpoint = process.env.API_HEALTH_CHECK_ENDPOINT;
-  const port = Number(process.env.API_PORT);
+  const port = Number(process.env.PORT);
 
   const application = express();
 

@@ -19,6 +19,8 @@ COPY --chown=node:node ["package.json", "package-lock.json", "./"]
 
 RUN npm ci --production
 
-COPY --chown=node:node ["rds-combined-ca-bundle.pem", "./dist", "./"]
+COPY --chown=node:node ["./dist", "./"]
+
+EXPOSE 2020 9229
 
 CMD ["dumb-init", "node", "main.js"]

@@ -23,15 +23,24 @@ export const startGraphQL = async ({ application, connection }) => {
       }
       type Hospital {
         _id: String
-        address: String
+        addressLine1: String
+        addressLine2: String
+        city: String
+        latitude: Float
+        longitude: Float
+        members: [User]
         name: String
-        users: [User]
+        postalCode: String
+        state: String
       }
       type User {
         _id: String
+        email: String
+        firstName: String
         hospitalId: String
         hospitals: [Hospital]
-        name: String
+        lastName: String
+        username: String
       }
       type Mutation {
         createHospital(name: String, address: String): Hospital
@@ -59,8 +68,12 @@ export const startGraphQL = async ({ application, connection }) => {
         },
       },
       Hospital: {
-        users: async ({ _id }) => {
-          return (await Users.find({ hospitalId: _id }).toArray()).map(prepare);
+        members: async ({ _id }) => {
+          return (
+            await Users.find({
+              hospitalMemberships: { $in: [ObjectId(_id)] },
+            }).toArray()
+          ).map(prepare);
         },
       },
       User: {
